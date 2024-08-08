@@ -1,10 +1,15 @@
+// Importando as dependências
 const express = require("express");
 const path = require("path");
 const enableHotReload = require("./hot-reload");
+const bodyParser = require('body-parser');
 const app = express();
 
-const exemploController = require("./controllers/exemplo");
-const produtoController = require("./controllers/produto");
+// Puxando os controladores da aplicação
+const controladorDePaginas = require("./controllers/controladorDePaginas");
+
+// Configurações do body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configurações do seu app Express
 app.set("view engine", "ejs");
@@ -18,11 +23,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // Habilitar hot-reload
 enableHotReload(app);
 
-// Rotas
-app.get("/", exemploController.mostrarTela);
-
-app.get("/produto", produtoController.mostrarTela);
-app.post("/adicionar-produto", produtoController.adicionarProduto);
+// Rotas das paginas
+app.get("/", controladorDePaginas.exibindoHomePage);
 
 // Inicie o servidor
 const port = 3000;
