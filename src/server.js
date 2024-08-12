@@ -1,12 +1,14 @@
 // Importando as dependências
 const express = require("express");
 const path = require("path");
-const enableHotReload = require("./hot-reload");
 const bodyParser = require('body-parser');
-const app = express();
+const enableHotReload = require("./hot-reload");
 
 // Puxando os controladores da aplicação
 const controladorDePaginas = require("./controllers/controladorDePaginas");
+
+// Chamando o express
+const app = express();
 
 // Configurações do body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
